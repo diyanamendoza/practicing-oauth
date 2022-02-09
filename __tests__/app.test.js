@@ -27,7 +27,6 @@ describe('why-i-autha routes', () => {
       .agent(app)
       .get('/api/v1/github/login/callback?code=42')
       .redirects(1);
-
     expect(req.body).toEqual({
       id: expect.any(String),
       username: 'fake_github_user',
