@@ -18,7 +18,7 @@ describe('why-i-autha routes', () => {
     const req = await request(app).get('/api/v1/github/login');
 
     expect(req.header.location).toMatch(
-      /https:\/\/github.com\/login\/oauth\/authorize\?client_id=[\w\d]+&scope=user&redirect_uri=http:\/\/localhost:7890\/api\/v1\/github\/login\/callback/i
+      /https:\/\/github.com\/login\/oauth\/authorize\?client_id=[\w\d]+&redirect_uri=http:\/\/localhost:7890\/api\/v1\/github\/login\/callback&scope=user/i
     );
   });
 
@@ -27,7 +27,6 @@ describe('why-i-autha routes', () => {
       .agent(app)
       .get('/api/v1/github/login/callback?code=42')
       .redirects(1);
-
     expect(req.body).toEqual({
       id: expect.any(String),
       username: 'fake_github_user',
